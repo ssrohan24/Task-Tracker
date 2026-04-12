@@ -92,7 +92,4 @@ http://localhost:5000/api
 ---
 
 ## 👨‍💻 Author
-
-Rohan S
-B.Tech Final Year Student
-Aspiring Software Engineer 🚀
+S S Rohan

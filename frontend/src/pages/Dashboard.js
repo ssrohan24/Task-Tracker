@@ -31,6 +31,10 @@ function Dashboard() {
 
 
 
+// eslint-disable-next-line
+useEffect(() => {
+  fetchIssues();
+}, []);
 
 
   useEffect(() => {

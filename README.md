@@ -5,24 +5,33 @@ Users can manage projects, create issues, assign tasks, and track progress.
 
 ---
 
+## 🌐 Live Demo
+
+👉 Frontend: https://task-tracker-brown-ten.vercel.app
+
+👉 Backend API: https://task-tracker-pk81.onrender.com
+
+⚠️ Note: Backend may take 20–30 seconds to respond (free hosting sleep mode)
+
+---
+
 ## 🔥 Features
 
-* 🔐 User Authentication (Login/Register with JWT)
-* 📁 Create & Manage Projects
-* 🐞 Create, Assign & Track Issues
-* 📊 Dashboard with Project & Issue Stats
-* 🔎 Filters (Status, Priority, Project)
-* 👥 Role-based functionality (Admin / Member)
-* ⚡ Responsive UI
+* 🔐 Authentication (JWT Login/Register)
+* 📁 Project Management (CRUD)
+* 🐞 Issue Tracking (assign, status, priority)
+* 📊 Dashboard with stats
+* 🔎 Filters (status, priority, project)
+* 👥 Role-based system (Admin / Member)
 
 ---
 
 ## 🛠 Tech Stack
 
-* **Frontend:** React.js, Axios, CSS
-* **Backend:** Node.js, Express.js
-* **Database:** MongoDB Atlas
-* **Auth:** JWT (JSON Web Token)
+* Frontend: React.js, Axios
+* Backend: Node.js, Express.js
+* Database: MongoDB Atlas
+* Auth: JWT
 
 ---
 
@@ -35,9 +44,9 @@ TaskTracker/
 
 ---
 
-## ⚙️ Setup Instructions (Local)
+# ⚙️ LOCAL SETUP (RUN ON YOUR SYSTEM)
 
-### 1️⃣ Clone the repo
+## 1️⃣ Clone repo
 
 ```bash
 git clone https://github.com/ssrohan24/Task-Tracker.git
@@ -46,7 +55,7 @@ cd Task-Tracker
 
 ---
 
-### 2️⃣ Backend Setup
+## 2️⃣ Backend Setup
 
 ```bash
 cd backend
@@ -64,7 +73,7 @@ JWT_SECRET=your_secret
 
 ---
 
-### 3️⃣ Frontend Setup
+## 3️⃣ Frontend Setup
 
 ```bash
 cd frontend
@@ -74,20 +83,54 @@ npm start
 
 ---
 
-## 🌐 API Base URL
+## 🔥 IMPORTANT (VERY IMPORTANT)
 
-```
-http://localhost:5000/api
+If running locally, update:
+
+📄 `frontend/src/api/axios.js`
+
+```js
+baseURL: "http://localhost:5000/api"
 ```
 
 ---
 
-## 🚀 Future Improvements
+## 🌐 FOR PRODUCTION (LIVE)
 
-* UI enhancement (modern design)
-* Notifications system
+Use:
+
+```js
+baseURL: "https://task-tracker-pk81.onrender.com/api"
+```
+
+---
+
+## 🚀 HOW IT WORKS
+
+```text
+React (Frontend)
+   ↓
+Express API (Backend)
+   ↓
+MongoDB (Database)
+```
+
+---
+
+## ⚠️ NOTES
+
+* Backend hosted on Render (may sleep)
+* First request can take time
+* Use correct API URL depending on environment
+
+---
+
+## 🚀 FUTURE IMPROVEMENTS
+
+* Better UI (Material UI / Tailwind)
+* Notifications
+* File uploads
 * Role-based dashboards
-* File attachments for issues
 
 ---
 

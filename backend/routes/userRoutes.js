@@ -1,0 +1,17 @@
+const express = require("express");
+const router = express.Router();
+
+const User = require("../models/User");
+const { protect } = require("../middleware/authMiddleware");
+
+// GET ALL USERS
+router.get("/", protect, async (req, res) => {
+  try {
+    const users = await User.find().select("_id name email");
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ msg: error.message });
+  }
+});
+
+module.exports = router;

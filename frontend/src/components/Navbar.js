@@ -10,13 +10,7 @@ function Navbar() {
   };
 
   return (
-    <div style={{
-      display: "flex",
-      justifyContent: "space-between",
-      background: "#007bff",
-      padding: "10px",
-      color: "white"
-    }}>
+    <div className="navbar">
       <h3>Project Tracker</h3>
 
       <div>

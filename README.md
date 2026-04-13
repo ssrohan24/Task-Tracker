@@ -1,52 +1,100 @@
 # 🚀 Task Tracker (MERN Stack Project)
 
-A full-stack Project & Issue Tracking system built using the MERN stack.
-Users can manage projects, create issues, assign tasks, and track progress.
+A full-stack **Project Collaboration & Issue Tracking System** built using the MERN stack.
+It helps teams manage projects, assign tasks, track issues, and monitor progress from a centralized dashboard.
 
 ---
 
 ## 🌐 Live Demo
 
-👉 Frontend: https://task-tracker-brown-ten.vercel.app
+👉 **Frontend (Vercel):** https://task-tracker-brown-ten.vercel.app
+👉 **Backend API (Render):** https://task-tracker-pk81.onrender.com
 
-👉 Backend API: https://task-tracker-pk81.onrender.com
-
-⚠️ Note: Backend may take 20–30 seconds to respond (free hosting sleep mode)
+⚠️ Note: Backend may take 20–30 seconds to respond initially due to free hosting (Render sleep mode).
 
 ---
 
-## 🔥 Features
+## 🔥 Core Features
 
-* 🔐 Authentication (JWT Login/Register)
-* 📁 Project Management (CRUD)
-* 🐞 Issue Tracking (assign, status, priority)
-* 📊 Dashboard with stats
-* 🔎 Filters (status, priority, project)
-* 👥 Role-based system (Admin / Member)
+### 🔐 Authentication & Authorization
+
+* User registration and login
+* JWT-based authentication
+* Role-based access:
+
+  * **Admin (Project Manager)**
+  * **Team Member**
+
+---
+
+### 📁 Project Management
+
+* Create, update, delete projects (Admin only)
+* Assign members to projects
+* Project fields:
+
+  * Name, description
+  * Start date, end date
+  * Status (pending / in-progress / completed)
+
+---
+
+### 🐞 Issue / Task Tracking
+
+* Create issues under projects
+* Assign issues to users
+* Set priority (low / medium / high)
+* Update issue status
+* Role-based control:
+
+  * Admin → full control
+  * Member → update only assigned issues
+
+---
+
+### 📊 Dashboard
+
+* Total projects
+* Total issues
+* Pending issues
+* Completed issues
+* Role-based visibility
+
+---
+
+### 🔎 Filters
+
+* Filter issues by:
+
+  * Status
+  * Priority
+  * Project
 
 ---
 
 ## 🛠 Tech Stack
 
-* Frontend: React.js, Axios
-* Backend: Node.js, Express.js
-* Database: MongoDB Atlas
-* Auth: JWT
+* **Frontend:** React.js, Axios
+* **Backend:** Node.js, Express.js
+* **Database:** MongoDB Atlas
+* **Authentication:** JWT
 
 ---
 
 ## 📁 Project Structure
 
+```
 TaskTracker/
-├── backend/
-├── frontend/
+├── backend/        # Express API
+├── frontend/       # React App
 ├── README.md
+```
 
 ---
 
-# ⚙️ LOCAL SETUP (RUN ON YOUR SYSTEM)
+## ⚙️ Local Setup
 
-## 1️⃣ Clone repo
+### 1️⃣ Clone Repository
 
 ```bash
 git clone https://github.com/ssrohan24/Task-Tracker.git
@@ -55,7 +103,7 @@ cd Task-Tracker
 
 ---
 
-## 2️⃣ Backend Setup
+### 2️⃣ Backend Setup
 
 ```bash
 cd backend
@@ -63,7 +111,7 @@ npm install
 npm run dev
 ```
 
-Create `.env` file:
+Create a `.env` file:
 
 ```
 PORT=5000
@@ -73,7 +121,7 @@ JWT_SECRET=your_secret
 
 ---
 
-## 3️⃣ Frontend Setup
+### 3️⃣ Frontend Setup
 
 ```bash
 cd frontend
@@ -83,11 +131,11 @@ npm start
 
 ---
 
-## 🔥 IMPORTANT (VERY IMPORTANT)
+## 🔧 Environment Configuration
 
-If running locally, update:
+### 🖥 Local Development
 
-📄 `frontend/src/api/axios.js`
+Update `frontend/src/api/axios.js`:
 
 ```js
 baseURL: "http://localhost:5000/api"
@@ -95,9 +143,7 @@ baseURL: "http://localhost:5000/api"
 
 ---
 
-## 🌐 FOR PRODUCTION (LIVE)
-
-Use:
+### 🌐 Production (Live)
 
 ```js
 baseURL: "https://task-tracker-pk81.onrender.com/api"
@@ -105,34 +151,36 @@ baseURL: "https://task-tracker-pk81.onrender.com/api"
 
 ---
 
-## 🚀 HOW IT WORKS
+## 🔄 Application Flow
 
-```text
+```
 React (Frontend)
-   ↓
+      ↓
 Express API (Backend)
-   ↓
+      ↓
 MongoDB (Database)
 ```
 
 ---
 
-## ⚠️ NOTES
+## ⚠️ Notes
 
-* Backend hosted on Render (may sleep)
-* First request can take time
-* Use correct API URL depending on environment
+* Backend is hosted on Render (free tier)
+* First request may take time due to server cold start
+* Ensure correct API URL is used based on environment
 
 ---
 
-## 🚀 FUTURE IMPROVEMENTS
+## 🎯 Key Highlights
 
-* Better UI (Material UI / Tailwind)
-* Notifications
-* File uploads
-* Role-based dashboards
+* Full MERN stack implementation
+* RESTful API design
+* Role-based access control (RBAC)
+* MongoDB relationships using references & populate
+* Clean project structure (MVC pattern)
 
 ---
 
 ## 👨‍💻 Author
-S S Rohan
+
+**S S Rohan**

@@ -3,15 +3,16 @@ const Issue = require("../models/Issue");
 // CREATE
 const createIssue = async (req, res) => {
   try {
-    const { title, description, project, assignedTo, priority } = req.body;
+   const { title, description, project, assignedTo, priority, dueDate } = req.body;
 
-    const issue = await Issue.create({
-      title,
-      description,
-      project,
-      assignedTo,
-      priority
-    });
+const issue = await Issue.create({
+  title,
+  description,
+  project,
+  assignedTo,
+  priority,
+  dueDate
+});
 
     res.json(issue);
   } catch (error) {
@@ -39,17 +40,35 @@ const getIssues = async (req, res) => {
 };
 
 // UPDATE
-const updateIssue = async (req, res) => {
+exports.updateIssue = async (req, res) => {
   try {
     const issue = await Issue.findById(req.params.id);
 
-    if (!issue) return res.status(404).json({ msg: "Not found" });
-
-    if (req.user.role !== "admin") {
-      if (issue.assignedTo.toString() !== req.user.id) {
-        return res.status(403).json({ msg: "Not authorized" });
-      }
+    if (!issue) {
+      return res.status(404).json({ msg: "Issue not found" });
     }
+
+    // 🔒 SECURITY CHECK
+    if (
+      req.user.role !== "admin" &&
+      issue.assignedTo.toString() !== req.user.id
+    ) {
+      return res.status(403).json({ msg: "Not allowed to update this issue" });
+    }
+
+    // ✅ UPDATE
+    const updated = await Issue.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+
+    res.json(updated);
+
+  } catch (error) {
+    res.status(500).json({ msg: error.message });
+  }
+};
 
     const updated = await Issue.findByIdAndUpdate(
       req.params.id,

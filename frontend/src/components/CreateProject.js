@@ -6,7 +6,8 @@ function CreateProject({ refresh }) {
   const [description, setDescription] = useState("");
   const [users, setUsers] = useState([]);
   const [selectedMembers, setSelectedMembers] = useState([]);
-
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
   // 🔥 FETCH USERS
   useEffect(() => {
     const fetchUsers = async () => {
@@ -42,7 +43,9 @@ function CreateProject({ refresh }) {
       await API.post("/projects", {
         name,
         description,
-        members: selectedMembers
+        members: selectedMembers,
+        startDate,
+        endDate
       });
 
       alert("Project created");
@@ -82,6 +85,17 @@ function CreateProject({ refresh }) {
             </option>
           ))}
         </select>
+        <input
+          type="date"
+          value={startDate}
+          onChange={(e) => setStartDate(e.target.value)}
+        />
+
+        <input
+          type="date"
+          value={endDate}
+          onChange={(e) => setEndDate(e.target.value)}
+        />
 
         <button type="submit">Create</button>
       </form>

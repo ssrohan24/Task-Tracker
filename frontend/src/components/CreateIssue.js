@@ -11,6 +11,10 @@ function CreateIssue({ refresh }) {
   const [assignedTo, setAssignedTo] = useState("");
   const [priority, setPriority] = useState("medium");
 
+  const [dueDate, setDueDate] = useState("");
+
+
+
   useEffect(() => {
     fetchProjects();
     fetchUsers();
@@ -30,10 +34,10 @@ function CreateIssue({ refresh }) {
     e.preventDefault();
 
 
-  if (!title || !project || !assignedTo) {
-    alert("Fill all required fields");
-    return;
-  }
+    if (!title || !project || !assignedTo) {
+      alert("Fill all required fields");
+      return;
+    }
 
     try {
       await API.post("/issues", {
@@ -41,7 +45,8 @@ function CreateIssue({ refresh }) {
         description,
         project,
         assignedTo,
-        priority
+        priority,
+        dueDate 
       });
 
       alert("Issue created");
@@ -56,6 +61,13 @@ function CreateIssue({ refresh }) {
       <h3>Create Issue</h3>
 
       <form onSubmit={handleSubmit}>
+
+        <input
+          type="date"
+          onChange={(e) => setDueDate(e.target.value)}
+        />
+
+
         <input
           placeholder="Title"
           value={title}
@@ -90,6 +102,11 @@ function CreateIssue({ refresh }) {
           <option value="medium">Medium</option>
           <option value="high">High</option>
         </select>
+
+        <input
+          type="date"
+          onChange={(e) => setDueDate(e.target.value)}
+        />
 
         <button type="submit">Create Issue</button>
       </form>

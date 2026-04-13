@@ -25,7 +25,10 @@ const issueSchema = new mongoose.Schema({
     type: String,
     enum: ["low", "medium", "high"],
     default: "medium"
-  }
+  },
+  dueDate: {
+  type: Date
+},
 }, { timestamps: true });
 
 module.exports = mongoose.model("Issue", issueSchema);

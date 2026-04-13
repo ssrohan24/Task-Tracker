@@ -2,9 +2,14 @@ import React from "react";
 import API from "../api/axios";
 
 function IssueCard({ issue, refresh }) {
+
   const updateStatus = async (status) => {
-    await API.put(`/issues/${issue._id}`, { status });
-    refresh();
+    try {
+      await API.put(`/issues/${issue._id}`, { status });
+      refresh();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -15,7 +20,9 @@ function IssueCard({ issue, refresh }) {
       <p>Status: {issue.status}</p>
       <p>Priority: {issue.priority}</p>
       <p>Project: {issue.project?.name}</p>
+      <p>Assigned: {issue.assignedTo?.name}</p>
 
+      {/* STATUS BUTTONS */}
       <button onClick={() => updateStatus("in-progress")}>
         In Progress
       </button>
@@ -23,7 +30,6 @@ function IssueCard({ issue, refresh }) {
       <button onClick={() => updateStatus("completed")}>
         Complete
       </button>
-      <p>Assigned: {issue.assignedTo?.name}</p>
     </div>
   );
 }

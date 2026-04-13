@@ -4,7 +4,7 @@ import axios from "axios";
 //   baseURL: "http://localhost:5000/api"
 // });
 const API = axios.create({
-  baseURL: "https://task-tracker-pk81.onrender.com/api"
+baseURL: "https://task-tracker-pk81.onrender.com/api"
 });
 
 // attach token automatically

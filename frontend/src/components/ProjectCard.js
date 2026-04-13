@@ -13,10 +13,24 @@ function ProjectCard({ project, refresh, user }) {
     }
   };
 
+//   console.log("PROJECT:", project);
+// console.log("MEMBERS:", project.members);
+
   return (
     <div className="card">
       <h3>{project.name}</h3>
       <p>{project.description}</p>
+
+
+      <div>
+        
+        <p>
+          <strong>Members:</strong>{" "}
+          {project.members && project.members.length > 0
+            ? project.members.map((m) => m.name || m.email).join(", ")
+            : "No members assigned"}
+        </p>
+      </div>
 
       {/* 🔥 ADMIN ONLY */}
       {user?.role === "admin" && (

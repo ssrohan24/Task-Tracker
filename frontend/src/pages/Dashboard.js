@@ -31,10 +31,7 @@ function Dashboard() {
 
 
 
-// eslint-disable-next-line
-useEffect(() => {
-  fetchIssues();
-}, []);
+  // eslint-disable-next-line
 
 
   useEffect(() => {
@@ -63,8 +60,8 @@ useEffect(() => {
     try {
       const decoded = JSON.parse(atob(token.split(".")[1]));
 
-      console.log("DECODED USER:", decoded);
-
+      // console.log("DECODED USER:", decoded);
+      console.log(error);
       setUser(decoded);
     } catch (error) {
       console.log("Token decode error:", error);
@@ -76,6 +73,11 @@ useEffect(() => {
     setLoading(true);
     try {
       const res = await API.get("/projects");
+
+      // console.log("PROJECT API RESPONSE:", res.data); 
+
+      console.log(error);
+
       setProjects(res.data);
     } catch (error) {
       console.log(error);
@@ -132,7 +134,7 @@ useEffect(() => {
           project={p}
           refresh={fetchProjects}
           user={user}
-        /> 
+        />
       ))}
 
 

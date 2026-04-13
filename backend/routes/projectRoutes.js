@@ -10,11 +10,11 @@ const {
 
 const { protect, adminOnly } = require("../middleware/authMiddleware");
 
-// CREATE → Admin only
+// CREATE
 router.post("/", protect, adminOnly, createProject);
 
-// GET → All logged-in users
-router.get("/", protect, getProjects);
+// GET ALL
+router.get("/", protect, getProjects); 
 
 // UPDATE
 router.put("/:id", protect, adminOnly, updateProject);

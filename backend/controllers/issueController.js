@@ -1,7 +1,7 @@
 const Issue = require("../models/Issue");
 
-// CREATE ISSUE
-exports.createIssue = async (req, res) => {
+// CREATE
+const createIssue = async (req, res) => {
   try {
     const { title, description, project, assignedTo, priority } = req.body;
 
@@ -19,20 +19,18 @@ exports.createIssue = async (req, res) => {
   }
 };
 
-// GET ALL ISSUES (WITH FILTER)
-exports.getIssues = async (req, res) => {
+// GET
+const getIssues = async (req, res) => {
   try {
-    const { status, priority, project } = req.query;
+    let query = {};
 
-    let filter = {};
+    if (req.user.role !== "admin") {
+      query.assignedTo = req.user.id;
+    }
 
-    if (status) filter.status = status;
-    if (priority) filter.priority = priority;
-    if (project) filter.project = project;
-
-    const issues = await Issue.find(filter)
-      .populate("project", "name")
-      .populate("assignedTo", "name email");
+    const issues = await Issue.find(query)
+      .populate("assignedTo", "name email")
+      .populate("project", "name");
 
     res.json(issues);
   } catch (error) {
@@ -40,27 +38,45 @@ exports.getIssues = async (req, res) => {
   }
 };
 
-// UPDATE ISSUE
-exports.updateIssue = async (req, res) => {
+// UPDATE
+const updateIssue = async (req, res) => {
   try {
-    const issue = await Issue.findByIdAndUpdate(
+    const issue = await Issue.findById(req.params.id);
+
+    if (!issue) return res.status(404).json({ msg: "Not found" });
+
+    if (req.user.role !== "admin") {
+      if (issue.assignedTo.toString() !== req.user.id) {
+        return res.status(403).json({ msg: "Not authorized" });
+      }
+    }
+
+    const updated = await Issue.findByIdAndUpdate(
       req.params.id,
       req.body,
       { new: true }
     );
 
-    res.json(issue);
+    res.json(updated);
   } catch (error) {
     res.status(500).json({ msg: error.message });
   }
 };
 
-// DELETE ISSUE
-exports.deleteIssue = async (req, res) => {
+// DELETE
+const deleteIssue = async (req, res) => {
   try {
     await Issue.findByIdAndDelete(req.params.id);
     res.json({ msg: "Issue deleted" });
   } catch (error) {
     res.status(500).json({ msg: error.message });
   }
+};
+
+// 🔥 EXPORT EVERYTHING
+module.exports = {
+  createIssue,
+  getIssues,
+  updateIssue,
+  deleteIssue
 };

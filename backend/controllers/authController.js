@@ -7,25 +7,25 @@ exports.register = async (req, res) => {
   try {
     const { name, email, password, role } = req.body;
 
-    // check user
     const userExists = await User.findOne({ email });
     if (userExists) {
       return res.status(400).json({ msg: "User already exists" });
     }
 
-    // hash password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    // create user
+    const allowedRoles = ["admin", "member"];
+
     const user = await User.create({
       name,
       email,
       password: hashedPassword,
-      role
+      role: allowedRoles.includes(role) ? role : "member"
     });
 
     res.json({ msg: "User registered successfully" });
+
   } catch (error) {
     res.status(500).json({ msg: error.message });
   }

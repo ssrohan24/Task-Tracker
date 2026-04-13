@@ -7,6 +7,8 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const [role, setRole] = useState("member");
+
   const navigate = useNavigate();
 
   const handleRegister = async (e) => {
@@ -16,7 +18,8 @@ function Register() {
       await API.post("/auth/register", {
         name,
         email,
-        password
+        password,
+        role
       });
 
       alert("Registered successfully");
@@ -50,6 +53,11 @@ function Register() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+
+        <select onChange={(e) => setRole(e.target.value)}>
+          <option value="member">Member</option>
+          <option value="admin">Admin</option>
+        </select>
 
         <button type="submit">Register</button>
       </form>
